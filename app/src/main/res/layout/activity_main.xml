@@ -1,46 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!-- Главный контэйнер экрана -->
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
-    <!--  Контейнер под верхнее меню -->
-    <RelativeLayout
-        android:id="@+id/top_bar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_centerHorizontal="true"
-        android:background="#7C4DFF" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!--  Контейнер под основной контент -->
-    <RelativeLayout
-        android:id="@+id/content_area"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottom_bar"
-        android:layout_below="@id/top_bar"
-        android:background="#ffffff">
-
-        <!--  Собственно наш контент -->
-        <View
-            android:id="@+id/content"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="50dp"
-            android:background="#FBB902" />
-    </RelativeLayout>
+            android:layout_height="?attr/actionBarSize"
+            app:title="Search It!"
+            app:titleTextColor="@android:color/white"
+            app:menu="@menu/top_app_bar"
+            app:navigationIcon="@drawable/ic_round_menu_24">
+        </com.google.android.material.appbar.MaterialToolbar>
 
-    <!--  Контейнер под нижнее меню  -->
-    <RelativeLayout
-        android:id="@+id/bottom_bar"
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:background="#69F0AE" />
+        android:layout_height="wrap_content"
+        android:background="#FF6200EE"
+        app:itemTextColor="@android:color/white"
+        app:itemIconTint="@android:color/white"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/navigation_menu" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

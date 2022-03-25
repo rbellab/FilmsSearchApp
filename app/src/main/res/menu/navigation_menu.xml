@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/favorites"
+        android:icon="@drawable/ic_round_favorite_24"
+        android:title="Кнопка 1"
+        app:showAsAction="withText"/>
+
+    <item
+        android:id="@+id/favorites2"
+        android:icon="@drawable/ic_round_favorite_24"
+        android:title="Кнопка 2"
+        app:showAsAction="withText"/>
+
+    <item
+        android:id="@+id/favorites3"
+        android:icon="@drawable/ic_round_favorite_24"
+        android:title="Кнопка 3"
+        app:showAsAction="withText"/>
+
+</menu>
