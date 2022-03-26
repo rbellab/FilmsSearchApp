@@ -3,22 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- Навигационная кнопка "Избранное" !-->
     <item
         android:id="@+id/favorites"
         android:icon="@drawable/ic_round_favorite_24"
-        android:title="Кнопка 1"
+        android:title="@string/fav_nav_btn_title"
         app:showAsAction="withText"/>
 
+    <!-- Навигационная кнопка "Посмотреть позже" !-->
     <item
-        android:id="@+id/favorites2"
-        android:icon="@drawable/ic_round_favorite_24"
-        android:title="Кнопка 2"
+        android:id="@+id/watch_later"
+        android:icon="@drawable/ic_round_watch_later_24"
+        android:title="@string/watch_later_nav_btn_title"
         app:showAsAction="withText"/>
 
+    <!-- Навигационная кнопка "Подборки" !-->
     <item
-        android:id="@+id/favorites3"
-        android:icon="@drawable/ic_round_favorite_24"
-        android:title="Кнопка 3"
+        android:id="@+id/collections"
+        android:icon="@drawable/ic_round_collections_24"
+        android:title="@string/collections_nav_btn_title"
         app:showAsAction="withText"/>
 
 </menu>

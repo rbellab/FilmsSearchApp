@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FilmsSearch</string>
+    <string name="mat_toolbar_title">Search It!</string>
+    <string name="fav_nav_btn_title">Избранное</string>
+    <string name="watch_later_nav_btn_title">Посмотреть позже</string>
+    <string name="collections_nav_btn_title">Подборки</string>
+    <string name="settings_menu_btn_title">Настройки</string>
+    <string name="nav_menu_btn_title">Здесь будет когда-нибудь меню</string>
+    <string name="disclaimer_text">[Постеры предоставлены https://www.movieposters.com/]</string>
 </resources>
