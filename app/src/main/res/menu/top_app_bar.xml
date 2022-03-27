@@ -2,9 +2,10 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Кнопка "Настройки" !-->
     <item
         android:id="@+id/settings"
-        android:title="Настройки"
+        android:title="@string/settings_menu_btn_title"
         android:icon="@drawable/ic_round_settings_24"
         app:showAsAction="ifRoom"/>
 </menu>
