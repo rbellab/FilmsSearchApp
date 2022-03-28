@@ -3,27 +3,50 @@ package eu.berngardt.filmssearch
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import eu.berngardt.filmssearch.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     /**
      * Обработчик onCreate */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         initNavigation()
+        initAdditionalPosters()
+    }
+
+    /**
+     * Метод для инициальзации дополнительных 4х постеров */
+    private fun initAdditionalPosters() {
+        binding.poster5.setOnClickListener {
+            createAndShowToast(R.string.poster5_text)
+        }
+
+        binding.poster6.setOnClickListener {
+            createAndShowToast(R.string.poster6_text)
+        }
+
+        binding.poster7.setOnClickListener {
+            createAndShowToast(R.string.poster7_text)
+        }
+
+        binding.poster8.setOnClickListener {
+            createAndShowToast(R.string.poster8_text)
+        }
     }
 
     /**
      * Метод для создания навигации  */
     private fun initNavigation() {
-        // Ищем наш тулбар
-        val topAppBar = findViewById<MaterialToolbar>(R.id.topAppBar)
-        // "Вешаем" на него ClickListener
-        topAppBar.setOnMenuItemClickListener {
+        // "Вешаем" на тулбар ClickListener
+        binding.topAppBar.setOnMenuItemClickListener {
             // Проверяем на что именно кликнул пользователь
             when (it.itemId) {
                 // Если это кнопка "Настройки", то реагируем
@@ -36,15 +59,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         // "Вешаем" ClickListener на кнопку "Меню"
-        topAppBar.setNavigationOnClickListener {
+        binding.topAppBar.setNavigationOnClickListener {
             createAndShowToast(R.string.nav_menu_btn_title)
         }
 
-        // Ищем нашу "панель навигации" ...
-        val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        // ... и "вешаем" на него "слушателя"
-        bottom_navigation.setOnNavigationItemSelectedListener {
-
+        // "Ввешаем" на панель навигации "слушателя"
+        binding.bottomNavigation.setOnNavigationItemSelectedListener {
             // Проверяем на что именно кликнул пользователь
             when (it.itemId) {
                 // Кнопка "Избранное"
