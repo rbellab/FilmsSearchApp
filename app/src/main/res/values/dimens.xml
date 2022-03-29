@@ -6,4 +6,8 @@
     <dimen name="cardview_elevation">5dp</dimen>
     <dimen name="linear_layout_default_height">100dp</dimen>
     <dimen name="text_view_margin">16dp</dimen>
+    <dimen name="text_view_txt_size">13sp</dimen>
+    <dimen name="poster_width">150dp</dimen>
+    <dimen name="poster_height">200dp</dimen>
+    <dimen name="poster_corner">15dp</dimen>
 </resources>

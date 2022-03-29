@@ -1,9 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="cardview_default_height">100dp</dimen>
-    <dimen name="cardview_default_margin">10dp</dimen>
-    <dimen name="cardview_default_corner_radius">15dp</dimen>
-    <dimen name="cardview_elevation">5dp</dimen>
-    <dimen name="linear_layout_default_height">100dp</dimen>
-    <dimen name="text_view_margin">16dp</dimen>
 </resources>
