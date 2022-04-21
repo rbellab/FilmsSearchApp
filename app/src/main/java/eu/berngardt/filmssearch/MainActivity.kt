@@ -15,31 +15,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-
+        setContentView(binding.root)
         initNavigation()
-        initAdditionalPosters()
-    }
-
-    /**
-     * Метод для инициальзации дополнительных 4х постеров */
-    private fun initAdditionalPosters() {
-        binding.poster5.setOnClickListener {
-            createAndShowToast(R.string.poster5_text)
-        }
-
-        binding.poster6.setOnClickListener {
-            createAndShowToast(R.string.poster6_text)
-        }
-
-        binding.poster7.setOnClickListener {
-            createAndShowToast(R.string.poster7_text)
-        }
-
-        binding.poster8.setOnClickListener {
-            createAndShowToast(R.string.poster8_text)
-        }
+        runMainFragment()
     }
 
     /**
@@ -88,6 +66,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun runMainFragment() {
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_placeholder, HomeFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
 
     /**
      * Метод для создания и отображения "тостов" */
