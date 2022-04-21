@@ -9,20 +9,43 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    /**
-     * Обработчик onCreate */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initNavigation()
-        runMainFragment()
+        launchMainFragment()
     }
 
-    /**
-     * Метод для создания навигации  */
+    private fun launchMainFragment() {
+        // Зупускаем фрагмент при старте
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_placeholder, HomeFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun launchDetailsFragment(film: Film) {
+        // Создаем "посылку"
+        val bundle = Bundle()
+        // Кладем наш фильм в "посылку"
+        bundle.putParcelable("film", film)
+        // Кладем фрагмент с деталями в перменную
+        val fragment = DetailsFragment()
+        // Прикрепляем нашу "посылку" к фрагменту
+        fragment.arguments = bundle
+
+        // Запускаем фрагмент
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     private fun initNavigation() {
+
         // "Вешаем" на тулбар ClickListener
         binding.topAppBar.setOnMenuItemClickListener {
             // Проверяем на что именно кликнул пользователь
@@ -65,16 +88,8 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-    }
 
-    private fun runMainFragment() {
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_placeholder, HomeFragment())
-            .addToBackStack(null)
-            .commit()
     }
-
 
     /**
      * Метод для создания и отображения "тостов" */
