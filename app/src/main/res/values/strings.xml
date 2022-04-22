@@ -11,4 +11,6 @@
     <string name="poster6_text">Постер 6</string>
     <string name="poster7_text">Постер 7</string>
     <string name="poster8_text">Постер 8</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

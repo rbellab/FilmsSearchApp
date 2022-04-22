@@ -9,42 +9,43 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    /**
-     * Обработчик onCreate */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-
+        setContentView(binding.root)
         initNavigation()
-        initAdditionalPosters()
+        launchMainFragment()
     }
 
-    /**
-     * Метод для инициальзации дополнительных 4х постеров */
-    private fun initAdditionalPosters() {
-        binding.poster5.setOnClickListener {
-            createAndShowToast(R.string.poster5_text)
-        }
-
-        binding.poster6.setOnClickListener {
-            createAndShowToast(R.string.poster6_text)
-        }
-
-        binding.poster7.setOnClickListener {
-            createAndShowToast(R.string.poster7_text)
-        }
-
-        binding.poster8.setOnClickListener {
-            createAndShowToast(R.string.poster8_text)
-        }
+    private fun launchMainFragment() {
+        // Зупускаем фрагмент при старте
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_placeholder, HomeFragment())
+            .addToBackStack(null)
+            .commit()
     }
 
-    /**
-     * Метод для создания навигации  */
+    fun launchDetailsFragment(film: Film) {
+        // Создаем "посылку"
+        val bundle = Bundle()
+        // Кладем наш фильм в "посылку"
+        bundle.putParcelable("film", film)
+        // Кладем фрагмент с деталями в перменную
+        val fragment = DetailsFragment()
+        // Прикрепляем нашу "посылку" к фрагменту
+        fragment.arguments = bundle
+
+        // Запускаем фрагмент
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     private fun initNavigation() {
+
         // "Вешаем" на тулбар ClickListener
         binding.topAppBar.setOnMenuItemClickListener {
             // Проверяем на что именно кликнул пользователь
@@ -87,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
     }
 
     /**
