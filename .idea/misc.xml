@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/drawable/background.xml" value="0.12" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/drawable/background_night.xml" value="0.112" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/activity_main.xml" value="0.3038949275362319" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/film_item.xml" value="0.30570652173913043" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/fragment_details.xml" value="0.1" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/fragment_favorites.xml" value="0.24864130434782608" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/fragment_home.xml" value="0.30570652173913043" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/menu/navigation_menu.xml" value="0.35572916666666665" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/menu/top_app_bar.xml" value="0.35572916666666665" />
         <entry key="..\:/01_LocalWork/10_AS_Projects/FilmsSearch/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.163" />
         <entry key="..\:/01_LocalWork/10_AS_Projects/FilmsSearch/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2585" />
         <entry key="..\:/01_LocalWork/10_AS_Projects/FilmsSearch/app/src/main/res/layout/activity_main.xml" value="0.286231884057971" />
@@ -17,18 +26,6 @@
         <entry key="..\:/01_LocalWork/10_AS_Projects/FilmsSearchApp/app/src/main/res/menu/navigation_menu.xml" value="0.17794871794871794" />
         <entry key="..\:/01_LocalWork/10_AS_Projects/FilmsSearchApp/app/src/main/res/menu/top_app_bar.xml" value="0.1824074074074074" />
         <entry key="..\:/01_LocalWork/10_AS_Projects/FilmsSearchApp/app/src/main/res/xml/anim1.xml" value="0.35572916666666665" />
-        <entry key="..\:/_git/FilmsSearchApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2245" />
-        <entry key="..\:/_git/FilmsSearchApp/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.2245" />
-        <entry key="..\:/_git/FilmsSearchApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2245" />
-        <entry key="..\:/_git/FilmsSearchApp/app/src/main/res/drawable/ic_round_collections_24.xml" value="0.2245" />
-        <entry key="..\:/_git/FilmsSearchApp/app/src/main/res/drawable/ic_round_favorite_24.xml" value="0.2245" />
-        <entry key="..\:/_git/FilmsSearchApp/app/src/main/res/drawable/ic_round_menu_24.xml" value="0.2245" />
-        <entry key="..\:/_git/FilmsSearchApp/app/src/main/res/drawable/ic_round_settings_24.xml" value="0.2245" />
-        <entry key="..\:/_git/FilmsSearchApp/app/src/main/res/drawable/ic_round_watch_later_24.xml" value="0.2245" />
-        <entry key="..\:/_git/FilmsSearchApp/app/src/main/res/layout/activity_details.xml" value="0.24375" />
-        <entry key="..\:/_git/FilmsSearchApp/app/src/main/res/layout/activity_main.xml" value="0.182518115942029" />
-        <entry key="..\:/_git/FilmsSearchApp/app/src/main/res/layout/film_item.xml" value="0.182518115942029" />
-        <entry key="..\:/_git/FilmsSearchApp/app/src/main/res/layout/fragment_home.xml" value="0.2296875" />
       </map>
     </option>
   </component>

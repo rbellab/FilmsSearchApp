@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment">
+    tools:context=".ui.fragments.HomeFragment">
     <androidx.cardview.widget.CardView
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/poster_1" />
+                app:srcCompat="@drawable/top_banner_poster_1" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -35,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/poster_2" />
+                app:srcCompat="@drawable/top_banner_poster_2" />
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -43,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1 "
-                app:srcCompat="@drawable/poster_3" />
+                app:srcCompat="@drawable/top_banner_poster_3" />
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -51,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/poster_4" />
+                app:srcCompat="@drawable/top_banner_poster_4" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
