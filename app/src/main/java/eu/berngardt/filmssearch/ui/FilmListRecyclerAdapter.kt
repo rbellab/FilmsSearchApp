@@ -1,9 +1,13 @@
-package eu.berngardt.filmssearch
+package eu.berngardt.filmssearch.ui
+
 
 import android.view.ViewGroup
+import eu.berngardt.filmssearch.R
 import android.view.LayoutInflater
+import eu.berngardt.filmssearch.storage.Film
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.film_item.view.*
+
 
 // В параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener)

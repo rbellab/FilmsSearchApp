@@ -1,7 +1,8 @@
-package eu.berngardt.filmssearch
+package eu.berngardt.filmssearch.ui
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import eu.berngardt.filmssearch.storage.Film
 import kotlinx.android.synthetic.main.film_item.view.*
 
 // В конструктор класс передается layout, который мы создали(film_item.xml)
@@ -15,7 +16,7 @@ class FilmViewHolder(itemView: View)
 
     // В этом методе кладем данные из film в наши view
     fun bind(film: Film) {
-        if (film != null) {
+        film?.let{
             copyFilmData(film)
         }
     }
