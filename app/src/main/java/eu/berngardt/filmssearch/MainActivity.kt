@@ -2,91 +2,113 @@ package eu.berngardt.filmssearch
 
 import android.os.Bundle
 import android.widget.Toast
+import eu.berngardt.filmssearch.storage.Film
 import androidx.appcompat.app.AppCompatActivity
+import eu.berngardt.filmssearch.ui.fragments.HomeFragment
+import eu.berngardt.filmssearch.ui.fragments.DetailsFragment
 import eu.berngardt.filmssearch.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: ActivityMainBinding? = null
 
-    /**
-     * Обработчик onCreate */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(_binding!!.root)
 
         initNavigation()
-        initAdditionalPosters()
+        launchMainFragment()
     }
 
-    /**
-     * Метод для инициальзации дополнительных 4х постеров */
-    private fun initAdditionalPosters() {
-        binding.poster5.setOnClickListener {
-            createAndShowToast(R.string.poster5_text)
-        }
-
-        binding.poster6.setOnClickListener {
-            createAndShowToast(R.string.poster6_text)
-        }
-
-        binding.poster7.setOnClickListener {
-            createAndShowToast(R.string.poster7_text)
-        }
-
-        binding.poster8.setOnClickListener {
-            createAndShowToast(R.string.poster8_text)
-        }
-    }
-
-    /**
-     * Метод для создания навигации  */
     private fun initNavigation() {
-        // "Вешаем" на тулбар ClickListener
-        binding.topAppBar.setOnMenuItemClickListener {
-            // Проверяем на что именно кликнул пользователь
-            when (it.itemId) {
-                // Если это кнопка "Настройки", то реагируем
-                R.id.settings -> {
-                    createAndShowToast(R.string.settings_menu_btn_title)
-                    true
-                }
-                else -> false
-            }
-        }
+        initTopAppBarOnMenuItemClickListener()
+        initMenuBtnOnMenuItemClickListener()
+        initBottomNavigationBar()
+    }
 
-        // "Вешаем" ClickListener на кнопку "Меню"
-        binding.topAppBar.setNavigationOnClickListener {
+    private fun initMenuBtnOnMenuItemClickListener() {
+        _binding?.topAppBar?.setNavigationOnClickListener {
             createAndShowToast(R.string.nav_menu_btn_title)
         }
+    }
 
-        // "Ввешаем" на панель навигации "слушателя"
-        binding.bottomNavigation.setOnNavigationItemSelectedListener {
-            // Проверяем на что именно кликнул пользователь
-            when (it.itemId) {
-                // Кнопка "Избранное"
-                R.id.favorites -> {
-                    createAndShowToast(R.string.fav_nav_btn_title)
-                    true
+    private fun initTopAppBarOnMenuItemClickListener() {
+        _binding.let {
+            it!!.topAppBar.let {
+                it.setOnMenuItemClickListener {
+                    // Проверяем на что именно кликнул пользователь
+                    when (it.itemId) {
+                        // Если это кнопка "Настройки", то реагируем
+                        R.id.settings -> {
+                            createAndShowToast(R.string.settings_menu_btn_title)
+                            true
+                        } else -> false
+                    }
                 }
-
-                // Кнопка "Посмотреть позже"
-                R.id.watch_later -> {
-                    createAndShowToast(R.string.watch_later_nav_btn_title)
-                    true
-                }
-
-                // Кнопка "Подборки"
-                R.id.collections -> {
-                    createAndShowToast(R.string.collections_nav_btn_title)
-                    true
-                }
-                else -> false
             }
         }
+    }
+
+    private fun initBottomNavigationBar() {
+        _binding.let {
+            it!!.bottomNavigation.let {
+                it.setOnNavigationItemSelectedListener {
+                    when (it.itemId) {
+                        // Кнопка "Избранное"
+                        R.id.favorites -> {
+                            createAndShowToast(R.string.fav_nav_btn_title)
+                            true
+                        }
+
+                        // Кнопка "Посмотреть позже"
+                        R.id.watch_later -> {
+                            createAndShowToast(R.string.watch_later_nav_btn_title)
+                            true
+                        }
+
+                        // Кнопка "Подборки"
+                        R.id.collections -> {
+                            createAndShowToast(R.string.collections_nav_btn_title)
+                            true
+                        } else -> false
+                    }
+                }
+            }
+        }
+    }
+
+    private fun launchMainFragment() {
+        // Зупускаем фрагмент при старте
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_placeholder, HomeFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun launchDetailsFragment(film: Film) {
+        // Создаем "посылку"
+        val bundle = Bundle()
+        // Кладем наш фильм в "посылку"
+        bundle.putParcelable("film", film)
+        // Кладем фрагмент с деталями в перменную
+        val fragment = DetailsFragment()
+        // Прикрепляем нашу "посылку" к фрагменту
+        fragment.arguments = bundle
+
+        // Запускаем фрагмент
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     /**
@@ -94,4 +116,5 @@ class MainActivity : AppCompatActivity() {
     private fun createAndShowToast(toastText: Int) {
         Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show()
     }
+
 }
