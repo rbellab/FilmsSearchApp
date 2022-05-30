@@ -2,19 +2,119 @@ package eu.berngardt.filmssearch
 
 import android.os.Bundle
 import android.widget.Toast
+import eu.berngardt.filmssearch.storage.Film
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import eu.berngardt.filmssearch.ui.fragments.HomeFragment
+import eu.berngardt.filmssearch.ui.fragments.DetailsFragment
 import eu.berngardt.filmssearch.databinding.ActivityMainBinding
+import eu.berngardt.filmssearch.ui.fragments.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: ActivityMainBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+        setTheme(R.style.Theme_FilmsSearch)
+
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(_binding!!.root)
+
         initNavigation()
         launchMainFragment()
+    }
+
+    private fun initNavigation() {
+        initTopAppBarOnMenuItemClickListener()
+        initMenuBtnOnMenuItemClickListener()
+        initBottomNavigationBar()
+    }
+
+    private fun initMenuBtnOnMenuItemClickListener() {
+        _binding?.topAppBar?.setNavigationOnClickListener {
+            createAndShowToast(R.string.nav_menu_btn_title)
+        }
+    }
+
+    private fun initTopAppBarOnMenuItemClickListener() {
+        _binding.let {
+            it!!.topAppBar.let {
+                it.setOnMenuItemClickListener {
+                    // Проверяем на что именно кликнул пользователь
+                    when (it.itemId) {
+                        // Если это кнопка "Настройки", то реагируем
+                        R.id.settings -> {
+                            createAndShowToast(R.string.settings_menu_btn_title)
+                            true
+                        } else -> false
+                    }
+                }
+            }
+        }
+    }
+
+    private fun initBottomNavigationBar() {
+        _binding.let {
+            it!!.bottomNavigation.let {
+                it.setOnNavigationItemSelectedListener {
+                    when (it.itemId) {
+                        // Кнопка "Домой"
+                        R.id.home -> {
+                            val tag = "home"
+                            val fragment = checkFragmentExistence(tag)
+                            // В первом параметре, если фрагмент не найден и метод вернул null, то с помощью
+                            // элвиса мы вызываем создание нового фрагмента
+                            changeFragment( fragment?: HomeFragment(), tag)
+                            true
+                        }
+
+                        // Кнопка "Избранное"
+                        R.id.favorites -> {
+                            val tag = "favorites"
+                            val fragment = checkFragmentExistence(tag)
+                            changeFragment( fragment?: FavoritesFragment(), tag)
+                            true
+                        }
+
+                        // Кнопка "Посмотреть позже"
+                        R.id.watch_later -> {
+                            val tag = "watch_later"
+                            val fragment = checkFragmentExistence(tag)
+                            changeFragment( fragment?: WatchLaterFragment(), tag)
+                            true
+                        }
+
+                        // Кнопка "Подборки"
+                        R.id.collections -> {
+                            val tag = "selections"
+                            val fragment = checkFragmentExistence(tag)
+                            changeFragment( fragment?: CollectionsFragment(), tag)
+                            true
+                        } else -> false
+                    }
+                }
+            }
+        }
+    }
+
+    private fun checkAndChangeFragment(tag: String) {
+        val fragment = checkFragmentExistence(tag)
+        // В первом параметре, если фрагмент не найден и метод вернул null,
+        // то с помощью элвиса мы вызываем создание нового фрагмента
+        changeFragment( fragment?: HomeFragment(), tag)
+    }
+
+    // Ищем фрагмент по тегу, если он есть то возвращаем его, если нет, то null
+    private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
+
+    private fun changeFragment(fragment: Fragment, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment, tag)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun launchMainFragment() {
@@ -44,51 +144,9 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun initNavigation() {
-
-        // "Вешаем" на тулбар ClickListener
-        binding.topAppBar.setOnMenuItemClickListener {
-            // Проверяем на что именно кликнул пользователь
-            when (it.itemId) {
-                // Если это кнопка "Настройки", то реагируем
-                R.id.settings -> {
-                    createAndShowToast(R.string.settings_menu_btn_title)
-                    true
-                }
-                else -> false
-            }
-        }
-
-        // "Вешаем" ClickListener на кнопку "Меню"
-        binding.topAppBar.setNavigationOnClickListener {
-            createAndShowToast(R.string.nav_menu_btn_title)
-        }
-
-        // "Ввешаем" на панель навигации "слушателя"
-        binding.bottomNavigation.setOnNavigationItemSelectedListener {
-            // Проверяем на что именно кликнул пользователь
-            when (it.itemId) {
-                // Кнопка "Избранное"
-                R.id.favorites -> {
-                    createAndShowToast(R.string.fav_nav_btn_title)
-                    true
-                }
-
-                // Кнопка "Посмотреть позже"
-                R.id.watch_later -> {
-                    createAndShowToast(R.string.watch_later_nav_btn_title)
-                    true
-                }
-
-                // Кнопка "Подборки"
-                R.id.collections -> {
-                    createAndShowToast(R.string.collections_nav_btn_title)
-                    true
-                }
-                else -> false
-            }
-        }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     /**
@@ -96,4 +154,5 @@ class MainActivity : AppCompatActivity() {
     private fun createAndShowToast(toastText: Int) {
         Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show()
     }
+
 }

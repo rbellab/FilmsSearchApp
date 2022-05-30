@@ -1,4 +1,4 @@
-package eu.berngardt.filmssearch
+package eu.berngardt.filmssearch.ui
 
 import android.view.View
 import android.graphics.Rect

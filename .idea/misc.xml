@@ -3,6 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/drawable/background_collections.xml" value="0.1635" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/drawable/background_favorite.xml" value="0.1635" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/drawable/background_home.xml" value="0.1635" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/drawable/background_later.xml" value="0.1635" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/drawable/background_mainact.xml" value="0.1635" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/drawable/background_night.xml" value="0.1635" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/drawable/background_search_view.xml" value="0.103" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/activity_main.xml" value="0.24682971014492755" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.24682971014492755" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/film_item.xml" value="0.26313405797101447" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/fragment_collections.xml" value="0.26313405797101447" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/fragment_details.xml" value="0.26313405797101447" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/fragment_favorites.xml" value="0.26313405797101447" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/fragment_home.xml" value="0.26313405797101447" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/layout/fragment_watch_later.xml" value="0.26313405797101447" />
+        <entry key="..\:/01_LocalWork/05_SkillFactory/FilmsSearchApp/app/src/main/res/menu/navigation_menu.xml" value="0.35572916666666665" />
         <entry key="..\:/01_LocalWork/10_AS_Projects/FilmsSearch/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.163" />
         <entry key="..\:/01_LocalWork/10_AS_Projects/FilmsSearch/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2585" />
         <entry key="..\:/01_LocalWork/10_AS_Projects/FilmsSearch/app/src/main/res/layout/activity_main.xml" value="0.286231884057971" />
