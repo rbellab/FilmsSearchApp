@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import eu.berngardt.filmssearch.ui.FilmListRecyclerAdapter
 import eu.berngardt.filmssearch.ui.TopSpacingItemDecoration
 import eu.berngardt.filmssearch.databinding.FragmentHomeBinding
+import eu.berngardt.filmssearch.ui.AnimationHelper
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 
@@ -34,6 +36,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        AnimationHelper.performFragmentCircularRevealAnimation(home_fragment_root, requireActivity(), 1)
 
         makeSearchFieldClickable()
         addTextListenerToSearchFie()

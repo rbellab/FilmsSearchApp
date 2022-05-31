@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.widget.Toast
 import eu.berngardt.filmssearch.storage.Film
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import eu.berngardt.filmssearch.ui.fragments.HomeFragment
 import eu.berngardt.filmssearch.ui.fragments.DetailsFragment
 import eu.berngardt.filmssearch.databinding.ActivityMainBinding
+import eu.berngardt.filmssearch.ui.fragments.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_FilmsSearch)
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(_binding!!.root)
@@ -56,27 +59,61 @@ class MainActivity : AppCompatActivity() {
             it!!.bottomNavigation.let {
                 it.setOnNavigationItemSelectedListener {
                     when (it.itemId) {
+                        // Кнопка "Домой"
+                        R.id.home -> {
+                            val tag = "home"
+                            val fragment = checkFragmentExistence(tag)
+                            // В первом параметре, если фрагмент не найден и метод вернул null, то с помощью
+                            // элвиса мы вызываем создание нового фрагмента
+                            changeFragment( fragment?: HomeFragment(), tag)
+                            true
+                        }
+
                         // Кнопка "Избранное"
                         R.id.favorites -> {
-                            createAndShowToast(R.string.fav_nav_btn_title)
+                            val tag = "favorites"
+                            val fragment = checkFragmentExistence(tag)
+                            changeFragment( fragment?: FavoritesFragment(), tag)
                             true
                         }
 
                         // Кнопка "Посмотреть позже"
                         R.id.watch_later -> {
-                            createAndShowToast(R.string.watch_later_nav_btn_title)
+                            val tag = "watch_later"
+                            val fragment = checkFragmentExistence(tag)
+                            changeFragment( fragment?: WatchLaterFragment(), tag)
                             true
                         }
 
                         // Кнопка "Подборки"
                         R.id.collections -> {
-                            createAndShowToast(R.string.collections_nav_btn_title)
+                            val tag = "selections"
+                            val fragment = checkFragmentExistence(tag)
+                            changeFragment( fragment?: CollectionsFragment(), tag)
                             true
                         } else -> false
                     }
                 }
             }
         }
+    }
+
+    private fun checkAndChangeFragment(tag: String) {
+        val fragment = checkFragmentExistence(tag)
+        // В первом параметре, если фрагмент не найден и метод вернул null,
+        // то с помощью элвиса мы вызываем создание нового фрагмента
+        changeFragment( fragment?: HomeFragment(), tag)
+    }
+
+    // Ищем фрагмент по тегу, если он есть то возвращаем его, если нет, то null
+    private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
+
+    private fun changeFragment(fragment: Fragment, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment, tag)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun launchMainFragment() {

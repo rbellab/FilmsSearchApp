@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import eu.berngardt.filmssearch.ui.FilmListRecyclerAdapter
 import eu.berngardt.filmssearch.ui.TopSpacingItemDecoration
 import eu.berngardt.filmssearch.databinding.FragmentFavoritesBinding
+import eu.berngardt.filmssearch.ui.AnimationHelper
+import kotlinx.android.synthetic.main.fragment_favorites.*
 
 
 class FavoritesFragment : Fragment() {
@@ -29,6 +31,8 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        AnimationHelper.performFragmentCircularRevealAnimation(fragment_favorites, requireActivity(), 2)
 
         // Получаем список при транзакции фрагмента
         val favoritesList: List<Film> = emptyList()
