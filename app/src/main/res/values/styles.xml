@@ -6,4 +6,8 @@
     <style name="ActionButtonBackground" parent="">
         <item name="android:backgroundTint">@color/purple_500</item>
     </style>
+    <declare-styleable name="RatingDonutView">
+        <attr name="progress" format="integer" />
+        <attr name="stroke" format="float" />
+    </declare-styleable>
 </resources>

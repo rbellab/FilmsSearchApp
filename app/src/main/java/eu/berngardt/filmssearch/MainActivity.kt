@@ -2,24 +2,32 @@ package eu.berngardt.filmssearch
 
 import android.os.Bundle
 import android.widget.Toast
-import eu.berngardt.filmssearch.storage.Film
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import eu.berngardt.filmssearch.storage.Film
+import eu.berngardt.filmssearch.ui.fragments.*
+import androidx.appcompat.app.AppCompatActivity
 import eu.berngardt.filmssearch.ui.fragments.HomeFragment
 import eu.berngardt.filmssearch.ui.fragments.DetailsFragment
 import eu.berngardt.filmssearch.databinding.ActivityMainBinding
-import eu.berngardt.filmssearch.ui.fragments.*
+
 
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
+
+    companion object {
+        private const val HOME_TAG       = "home"
+        private const val FAV_TAG        = "favorites"
+        private const val WLATER_TAG     = "watch_later"
+        private const val SELECTIONS_TAG = "selections"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_FilmsSearch)
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(_binding!!.root)
+        setContentView(_binding?.root)
 
         initNavigation()
         launchMainFragment()
@@ -39,10 +47,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initTopAppBarOnMenuItemClickListener() {
         _binding.let {
-            it!!.topAppBar.let {
-                it.setOnMenuItemClickListener {
+            it?.topAppBar.let {
+                it?.setOnMenuItemClickListener {
                     // Проверяем на что именно кликнул пользователь
-                    when (it.itemId) {
+                    when (it?.itemId) {
                         // Если это кнопка "Настройки", то реагируем
                         R.id.settings -> {
                             createAndShowToast(R.string.settings_menu_btn_title)
@@ -56,40 +64,37 @@ class MainActivity : AppCompatActivity() {
 
     private fun initBottomNavigationBar() {
         _binding.let {
-            it!!.bottomNavigation.let {
-                it.setOnNavigationItemSelectedListener {
-                    when (it.itemId) {
+            it?.bottomNavigation.let {
+                it?.setOnNavigationItemSelectedListener {
+                    when (it?.itemId) {
+
                         // Кнопка "Домой"
                         R.id.home -> {
-                            val tag = "home"
-                            val fragment = checkFragmentExistence(tag)
-                            // В первом параметре, если фрагмент не найден и метод вернул null, то с помощью
-                            // элвиса мы вызываем создание нового фрагмента
-                            changeFragment( fragment?: HomeFragment(), tag)
+                            val fragment = checkFragmentExistence(HOME_TAG)
+                            // В первом параметре, если фрагмент не найден и метод вернул null,
+                            // то с помощью элвиса мы вызываем создание нового фрагмента
+                            changeFragment( fragment?: HomeFragment(), HOME_TAG)
                             true
                         }
 
                         // Кнопка "Избранное"
                         R.id.favorites -> {
-                            val tag = "favorites"
-                            val fragment = checkFragmentExistence(tag)
-                            changeFragment( fragment?: FavoritesFragment(), tag)
+                            val fragment = checkFragmentExistence(FAV_TAG)
+                            changeFragment( fragment?: FavoritesFragment(), FAV_TAG)
                             true
                         }
 
                         // Кнопка "Посмотреть позже"
                         R.id.watch_later -> {
-                            val tag = "watch_later"
-                            val fragment = checkFragmentExistence(tag)
-                            changeFragment( fragment?: WatchLaterFragment(), tag)
+                            val fragment = checkFragmentExistence(WLATER_TAG)
+                            changeFragment( fragment?: WatchLaterFragment(), WLATER_TAG)
                             true
                         }
 
                         // Кнопка "Подборки"
                         R.id.collections -> {
-                            val tag = "selections"
-                            val fragment = checkFragmentExistence(tag)
-                            changeFragment( fragment?: CollectionsFragment(), tag)
+                            val fragment = checkFragmentExistence(SELECTIONS_TAG)
+                            changeFragment( fragment?: CollectionsFragment(), SELECTIONS_TAG)
                             true
                         } else -> false
                     }
