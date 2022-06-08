@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <dimen name="rating_view_donut_width">60dp</dimen>
+    <dimen name="rating_view_donut_height">60dp</dimen>
+    <dimen name="rating_view_donut_transZ">11dp</dimen>
+    <dimen name="film_item_cv_margin">5dp</dimen>
+    <dimen name="film_item_cv_elvation">1dp</dimen>
+    <dimen name="film_item_cv_corner_radius">10dp</dimen>
+    <dimen name="film_item_title_texview_width">0dp</dimen>
+    <dimen name="film_item_title_texview_padding">8dp</dimen>
+    <dimen name="film_item_descr_texview_width">0dp</dimen>
+    <dimen name="film_item_descr_texview_height">0dp</dimen>
+    <dimen name="film_item_descr_texview_padding">8dp</dimen>
+    <dimen name="film_item_details_layout_height">200dp</dimen>
+    <dimen name="film_item_details_toolbar_min_height">60dp</dimen>
+</resources>

@@ -1,4 +1,4 @@
-package eu.berngardt.filmssearch.ui
+package eu.berngardt.filmssearch.utils
 
 import kotlin.math.hypot
 import android.view.View
@@ -39,7 +39,7 @@ object AnimationHelper {
                     activity.runOnUiThread {
                         //  Cуперсложная математика вычисления старта анимации
                         val itemCenter = rootView.width / (MENU_ITEMS_COUNT * COMPLEX_MATH_COEFF_TWO)
-                        val step = (itemCenter * 2) * (position - COMPLEX_MATH_COEFF_ONE) + itemCenter
+                        val step = (itemCenter * COMPLEX_MATH_COEFF_TWO) * (position - COMPLEX_MATH_COEFF_ONE) + itemCenter
 
                         val x: Int = step
                         val y: Int = rootView.y.roundToInt() + rootView.height

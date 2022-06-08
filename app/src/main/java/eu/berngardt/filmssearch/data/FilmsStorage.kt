@@ -1,6 +1,7 @@
-package eu.berngardt.filmssearch.storage
+package eu.berngardt.filmssearch.data
 
 import eu.berngardt.filmssearch.R
+import eu.berngardt.filmssearch.domain.Film
 
 object FilmsStorage {
     private var _filmsList: List<Film>? = null

@@ -1,12 +1,13 @@
-package eu.berngardt.filmssearch.ui
+package view.rv_adapters
 
 
 import android.view.ViewGroup
 import eu.berngardt.filmssearch.R
 import android.view.LayoutInflater
-import eu.berngardt.filmssearch.storage.Film
+import eu.berngardt.filmssearch.domain.Film
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.film_item.view.*
+import view.rv_viewholders.FilmViewHolder
 
 
 // В параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити
