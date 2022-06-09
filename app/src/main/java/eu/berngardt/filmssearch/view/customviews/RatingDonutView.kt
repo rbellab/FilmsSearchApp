@@ -1,4 +1,4 @@
-package eu.berngardt.filmssearch.storage
+package view.customviews
 
 import android.view.View
 import android.graphics.*

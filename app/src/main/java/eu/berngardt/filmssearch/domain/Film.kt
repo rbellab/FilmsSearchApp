@@ -1,4 +1,4 @@
-package eu.berngardt.filmssearch.storage
+package eu.berngardt.filmssearch.domain
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

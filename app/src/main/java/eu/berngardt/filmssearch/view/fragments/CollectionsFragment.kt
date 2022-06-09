@@ -1,11 +1,12 @@
-package eu.berngardt.filmssearch.ui.fragments
+package view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import eu.berngardt.filmssearch.ui.AnimationHelper
+import android.widget.FrameLayout
+import eu.berngardt.filmssearch.utils.AnimationHelper
 import kotlinx.android.synthetic.main.fragment_collections.*
 import eu.berngardt.filmssearch.databinding.FragmentCollectionsBinding
 
@@ -21,9 +22,9 @@ class CollectionsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): FrameLayout? {
         _binding = FragmentCollectionsBinding.inflate(layoutInflater)
-        return _binding!!.root
+        return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

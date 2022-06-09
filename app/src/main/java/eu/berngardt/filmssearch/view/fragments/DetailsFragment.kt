@@ -1,4 +1,4 @@
-package eu.berngardt.filmssearch.ui.fragments
+package view.fragments
 
 import android.view.View
 import android.os.Bundle
@@ -6,8 +6,9 @@ import android.content.Intent
 import android.view.ViewGroup
 import eu.berngardt.filmssearch.R
 import android.view.LayoutInflater
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
-import eu.berngardt.filmssearch.storage.Film
+import eu.berngardt.filmssearch.domain.Film
 import eu.berngardt.filmssearch.databinding.FragmentDetailsBinding
 
 
@@ -23,9 +24,9 @@ class DetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): CoordinatorLayout? {
         _binding = FragmentDetailsBinding.inflate(layoutInflater)
-        return _binding!!.root
+        return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,16 +76,16 @@ class DetailsFragment : Fragment() {
     private fun copyFilmData(film: Film) {
         _binding.let {
             // Устанавливаем заголовок
-            it!!.detailsToolbar.title = film.title
+            it?.detailsToolbar?.title = film.title
 
             // Устанавливаем картинку
-            it!!.detailsPoster.setImageResource(film.poster)
+            it?.detailsPoster?.setImageResource(film.poster)
 
             // Устанавливаем описание
-            it!!.detailsDescription.text = film.description
+            it?.detailsDescription?.text = film.description
 
             // Устанавливаем находится ли в Избранном
-            it!!.detailsFabFavorites.setImageResource(
+            it?.detailsFabFavorites?.setImageResource(
                 if (film.isInFavorites) R.drawable.ic_baseline_favorite_24
                 else R.drawable.ic_baseline_favorite_border_24
             )
