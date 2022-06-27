@@ -1,4 +1,4 @@
-package view.fragments
+package eu.berngardt.filmssearch.view.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -8,6 +8,8 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import eu.berngardt.filmssearch.domain.Film
 import androidx.recyclerview.widget.LinearLayoutManager
+import eu.berngardt.filmssearch.databinding.FragmentCollectionsBinding
+import eu.berngardt.filmssearch.databinding.FragmentDetailsBinding
 import view.rv_adapters.FilmListRecyclerAdapter
 import view.rv_decorations.TopSpacingItemDecoration
 import eu.berngardt.filmssearch.databinding.FragmentFavoritesBinding
@@ -19,6 +21,8 @@ import kotlinx.android.synthetic.main.fragment_favorites.*
 class FavoritesFragment : Fragment() {
 
     private var _binding: FragmentFavoritesBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
     override fun onCreateView(
@@ -27,7 +31,7 @@ class FavoritesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): FrameLayout? {
         _binding = FragmentFavoritesBinding.inflate(layoutInflater)
-        return _binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,8 +41,7 @@ class FavoritesFragment : Fragment() {
 
         // Получаем список при транзакции фрагмента
         val favoritesList: List<Film> = emptyList()
-        _binding?.let {
-            _binding!!.favoritesRecycler.apply {
+        binding.favoritesRecycler.apply {
                 filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
                     override fun click(film: Film) {
                         (requireActivity() as MainActivity).launchDetailsFragment(film)
@@ -54,7 +57,6 @@ class FavoritesFragment : Fragment() {
                 // Применяем декоратор для отступов
                 val decorator = TopSpacingItemDecoration(8)
                 addItemDecoration(decorator)
-            }
         }
 
         // Кладем нашу БД в RV

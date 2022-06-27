@@ -1,4 +1,4 @@
-package view.fragments
+package eu.berngardt.filmssearch.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,18 +13,15 @@ import kotlinx.android.synthetic.main.fragment_watch_later.*
 class WatchLaterFragment : Fragment() {
 
     private var _binding: FragmentWatchLaterBinding? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FrameLayout? {
+    ): FrameLayout {
         _binding = FragmentWatchLaterBinding.inflate(layoutInflater)
-        return _binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
