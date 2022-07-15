@@ -1,95 +1,80 @@
-package view.fragments
+package eu.berngardt.filmssearch.view.fragments
 
-import android.view.View
-import android.os.Bundle
 import android.content.Intent
-import android.view.ViewGroup
-import eu.berngardt.filmssearch.R
+import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.coordinatorlayout.widget.CoordinatorLayout
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import eu.berngardt.filmssearch.domain.Film
+import eu.berngardt.filmssearch.R
+import eu.berngardt.filmssearch.data.ApiConstants
 import eu.berngardt.filmssearch.databinding.FragmentDetailsBinding
-
+import com.bumptech.glide.Glide
 
 class DetailsFragment : Fragment() {
-
-    companion object {
-        private const val ARG_KEY_FILM = "film"
-    }
+    private lateinit var film: Film
 
     private var _binding: FragmentDetailsBinding? = null
-    private lateinit var film: Film
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): CoordinatorLayout? {
-        _binding = FragmentDetailsBinding.inflate(layoutInflater)
-        return _binding?.root
+    ): View {
+        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setFilmsDetails()
-        initButtons()
+
+        binding.detailsFabFavorites.setOnClickListener {
+            if (!film.isInFavorites) {
+                binding.detailsFabFavorites.setImageResource(R.drawable.ic_baseline_favorite_24)
+                film.isInFavorites = true
+            } else {
+                binding.detailsFabFavorites.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                film.isInFavorites = false
+            }
+        }
+
+        binding.detailsFabShare.setOnClickListener {
+            // Создаем интент
+            val intent = Intent()
+            // Укзываем action с которым он запускается
+            intent.action = Intent.ACTION_SEND
+            // Кладем данные о нашем фильме
+            intent.putExtra(
+                Intent.EXTRA_TEXT,
+                "Привет! Зацени киношку: ${film.title} \n\n ${film.description}"
+            )
+            // УКазываем MIME тип, чтобы система знала, какое приложения предложить
+            intent.type = "text/plain"
+            // Запускаем наше активити
+            startActivity(Intent.createChooser(intent, "Поделиться с:"))
+        }
     }
 
     private fun setFilmsDetails() {
-        // Получаем наш фильм
-        film = arguments?.get(ARG_KEY_FILM) as Film
-        film.let {
-            copyFilmData(it)
-        }
-    }
+        // Получаем наш фильм из переданного бандла
+        film = arguments?.get("film") as Film
 
-    private fun initButtons() {
-        _binding?.let {
-            val fav = it.detailsFabFavorites
-            it.detailsFabFavorites.setOnClickListener {
-                if (!film.isInFavorites) {
-                    fav.setImageResource(R.drawable.ic_baseline_favorite_24)
-                    film.isInFavorites = true
-                } else {
-                    fav.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-                    film.isInFavorites = false
-                }
-            }
-            it.detailsFabShare.setOnClickListener {
-                // Создаем интент
-                val intent = Intent()
-                // Укзываем action с которым он запускается
-                intent.action = Intent.ACTION_SEND
-                // Кладем данные о нашем фильме
-                intent.putExtra(
-                    Intent.EXTRA_TEXT,
-                    "Привет! Зацени киношку: ${film.title} \n\n ${film.description}"
-                )
-                // Указываем MIME тип, чтобы система знала, какое приложения предложить
-                intent.type = "text/plain"
-                // Запускаем наше активити
-                startActivity(Intent.createChooser(intent, "Share To:"))
-            }
-        }
-    }
+        // Устанавливаем заголовок
+        binding.detailsToolbar.title = film.title
+        // Устанавливаем картинку
+        Glide.with(this)
+            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
+            .centerCrop()
+            .into(binding.detailsPoster)
+        // Устанавливаем описание
+        binding.detailsDescription.text = film.description
 
-    private fun copyFilmData(film: Film) {
-        _binding.let {
-            // Устанавливаем заголовок
-            it?.detailsToolbar?.title = film.title
-
-            // Устанавливаем картинку
-            it?.detailsPoster?.setImageResource(film.poster)
-
-            // Устанавливаем описание
-            it?.detailsDescription?.text = film.description
-
-            // Устанавливаем находится ли в Избранном
-            it?.detailsFabFavorites?.setImageResource(
-                if (film.isInFavorites) R.drawable.ic_baseline_favorite_24
-                else R.drawable.ic_baseline_favorite_border_24
-            )
-        }
+        binding.detailsFabFavorites.setImageResource(
+            if (film.isInFavorites) R.drawable.ic_baseline_favorite_24
+            else R.drawable.ic_baseline_favorite_border_24
+        )
     }
 
     override fun onDestroy() {

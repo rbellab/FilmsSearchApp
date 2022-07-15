@@ -1,30 +1,35 @@
-package view.fragments
+package eu.berngardt.filmssearch.view.fragments
 
-import java.util.*
-import android.view.View
 import android.os.Bundle
-import android.view.ViewGroup
 import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import eu.berngardt.filmssearch.domain.Film
 import androidx.recyclerview.widget.LinearLayoutManager
-import view.rv_adapters.FilmListRecyclerAdapter
-import view.rv_decorations.TopSpacingItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import eu.berngardt.filmssearch.databinding.FragmentHomeBinding
+import eu.berngardt.filmssearch.domain.Film
 import eu.berngardt.filmssearch.utils.AnimationHelper
 import eu.berngardt.filmssearch.view.MainActivity
 import eu.berngardt.filmssearch.viewmodel.HomeFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import view.rv_adapters.FilmListRecyclerAdapter
+import view.rv_decorations.TopSpacingItemDecoration
+import java.util.*
 
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+    private var page: Int = 1
+
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
     private val viewModel by lazy {
@@ -48,7 +53,37 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): ConstraintLayout? {
         _binding = FragmentHomeBinding.inflate(layoutInflater)
-        return _binding?.root
+
+        binding.mainRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            // Попытка реализации пагинации. Судя по-всему, не очень удачная. :)
+            // Работает, но жутко криво. :)
+
+            // Насколько всего прокрутили
+            private var totalScrolledDy : Int = 0
+
+            override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(rv, dx, dy)
+
+                // Максимально допустимое значение для текущей страницы
+                var maxDy = rv.getChildAt(0).measuredHeight * (rv.adapter!!.itemCount - 3)
+
+                // Увеличиваем значение прокрученных "пикселей"
+                totalScrolledDy += dy
+
+                // Если привысии "лимит", то...
+                if (totalScrolledDy >= maxDy) {
+                    // ... увеличиваем номер странички
+                    page++;
+                    // "скручиваем пробег"
+                    totalScrolledDy = 0
+                    // Получаем данные с нужной страничкой
+                    viewModel.reloadData(page)
+                    // Перемещаемся на начало новой странички
+                    rv.scrollToPosition(0)
+                }
+            }
+        })
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,36 +102,30 @@ class HomeFragment : Fragment() {
     }
 
     private fun makeSearchFieldClickable() {
-        _binding?.let {
-            // Делаем всё посковое поле "кликабельным"
-            it.searchView.setOnClickListener {
-                it.search_view.isIconified = false
-            }
+        // Делаем всё посковое поле "кликабельным"
+        binding.searchView.setOnClickListener {
+            it.search_view.isIconified = false
         }
     }
 
     private fun addTextListenerToSearchFie() {
-        _binding?.let {
-            // Подключаем слушателя изменений введенного текста в поиска
-            it.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        // Подключаем слушателя изменений введенного текста в поиска
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            // Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                TODO("Not yet implemented")
+            }
 
-                // Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    TODO("Not yet implemented")
-                }
+            // Этот метод отрабатывает на каждое изменения текста
+            override fun onQueryTextChange(newText: String?): Boolean {
+                TODO("Not yet implemented")
+            }
 
-                // Этот метод отрабатывает на каждое изменения текста
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    TODO("Not yet implemented")
-                }
-
-            })
-        }
+        })
     }
 
     private fun addQueryTextListenerToSearchFie() {
-        _binding?.let {
-            it.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
 
                 // Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
                 override fun onQueryTextSubmit(query: String?): Boolean {
@@ -122,28 +151,25 @@ class HomeFragment : Fragment() {
                     return true
                 }
             })
-        }
     }
 
     private fun applyMainRecyclerAdapter() {
-        _binding?.let {
-            it.mainRecycler.apply {
-                filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
-                    override fun click(film: Film) {
-                        (requireActivity() as MainActivity).launchDetailsFragment(film)
-                    }
-                })
+        binding.mainRecycler.apply {
+            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
+                override fun click(film: Film) {
+                    (requireActivity() as MainActivity).launchDetailsFragment(film)
+                }
+            })
 
-                // Присваиваем адаптер
-                adapter = filmsAdapter
+            // Присваиваем адаптер
+            adapter = filmsAdapter
 
-                // Присвои layoutmanager
-                layoutManager = LinearLayoutManager(requireContext())
+            // Присвои layoutmanager
+            layoutManager = LinearLayoutManager(requireContext())
 
-                // Применяем декоратор для отступов
-                val decorator = TopSpacingItemDecoration(8)
-                addItemDecoration(decorator)
-            }
+            // Применяем декоратор для отступов
+            val decorator = TopSpacingItemDecoration(8)
+            addItemDecoration(decorator)
         }
 
         // Кладем нашу БД в RV
@@ -156,3 +182,4 @@ class HomeFragment : Fragment() {
     }
 
 }
+
