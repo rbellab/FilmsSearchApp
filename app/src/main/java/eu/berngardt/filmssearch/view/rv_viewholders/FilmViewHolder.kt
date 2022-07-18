@@ -23,7 +23,7 @@ class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     // В этом методе кладем данные из film в наши view
     fun bind(film: Film) {
-        film?.let{
+        film.let{
             copyFilmData(film)
         }
     }
@@ -35,7 +35,7 @@ class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Указываем контейнер, в которм будет "жить" наша картинка
         Glide.with(itemView)
             // Загружаем сам ресурс
-            .load(ApiConstants.IMAGES_URL + "w342" + film.poster)
+            .load(getFilmPosterUrl(film.poster))
             // Центруем изображение
             .centerCrop()
             // Указываем ImageView, куда будем загружать изображение
@@ -44,5 +44,14 @@ class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         description.text = film.description
         // Устанавливаем рэйтинг
         ratingDonut.setProgress((film.rating * RATING_CALC_COEFF).toInt())
+    }
+
+    // Метод для полученя URL постера фильма
+    private fun getFilmPosterUrl(posterUrl: String) : String {
+        return StringBuilder()
+            .append(ApiConstants.BASE_MOVIE_IMAGE_URL)
+            .append(ApiConstants.MOVIE_POSTER_IMAGE_SIZE)
+            .append(posterUrl)
+            .toString()
     }
 }

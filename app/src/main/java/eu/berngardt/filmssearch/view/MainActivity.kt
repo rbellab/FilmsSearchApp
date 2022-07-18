@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initMenuBtnOnMenuItemClickListener() {
-        binding.topAppBar?.setNavigationOnClickListener {
+        binding.topAppBar.setNavigationOnClickListener {
             createAndShowToast(R.string.nav_menu_btn_title)
         }
     }
