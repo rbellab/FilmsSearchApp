@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">FilmsSearch</string>
-    <string name="fav_nav_btn_title">Избранное</string>
-    <string name="watch_later_nav_btn_title">Посмотреть позже</string>
-    <string name="collections_nav_btn_title">Подборки</string>
-    <string name="settings_menu_btn_title">Настройки</string>
-    <string name="nav_menu_btn_title">Здесь будет когда-нибудь меню</string>
-    <string name="home_btn_title">Домой</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="menu_favorites_title_text">Избранное</string>
+    <string name="menu_watch_later_title_text">Посмотреть позже</string>
+    <string name="menu_selections_title_text">Подборки</string>
+    <string name="menu_home_title_text">Главная</string>
+    <string name="menu_settings_title_text">Настройки</string>
+    <string name="radio_button_popular">Популярные</string>
+    <string name="radio_button_top_rated">Топ</string>
+    <string name="radio_button_upcoming">Скоро</string>
+    <string name="radio_button_playing">В кинотеатрах</string>
+    <string name="radio_group_header">Подборка на главном экране:</string>
+    <string name="film_tv_title">Title</string>
 </resources>

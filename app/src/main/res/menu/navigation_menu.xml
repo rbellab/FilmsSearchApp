@@ -2,33 +2,28 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <!-- Навигационная кнопка "Домой" !-->
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="@string/home_btn_title"
-        app:showAsAction="withText"/>
-
-    <!-- Навигационная кнопка "Избранное" !-->
+        android:title="@string/menu_home_title_text"/>
     <item
         android:id="@+id/favorites"
-        android:icon="@drawable/ic_round_favorite_24"
-        android:title="@string/fav_nav_btn_title"
+        android:icon="@drawable/ic_round_favorite"
+        android:title="@string/menu_favorites_title_text"
         app:showAsAction="withText"/>
-
-    <!-- Навигационная кнопка "Посмотреть позже" !-->
     <item
         android:id="@+id/watch_later"
-        android:icon="@drawable/ic_round_watch_later_24"
-        android:title="@string/watch_later_nav_btn_title"
+        android:icon="@drawable/ic_round_watch_later"
+        android:title="@string/menu_watch_later_title_text"
         app:showAsAction="withText"/>
-
-    <!-- Навигационная кнопка "Подборки" !-->
     <item
-        android:id="@+id/collections"
-        android:icon="@drawable/ic_round_collections_24"
-        android:title="@string/collections_nav_btn_title"
+        android:id="@+id/selections"
+        android:icon="@drawable/ic_round_video_library"
+        android:title="@string/menu_selections_title_text"
         app:showAsAction="withText"/>
-
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_round_settings_24"
+        android:title="@string/menu_settings_title_text"
+        app:showAsAction="withText"/>
 </menu>

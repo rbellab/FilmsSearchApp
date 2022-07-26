@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="@dimen/film_item_hight">
 
-    <view.customviews.RatingDonutView
+    <eu.berngardt.filmssearch.view.customviews.RatingDonutView
         android:id="@+id/rating_donut"
-        android:layout_width="@dimen/rating_view_donut_width"
-        android:layout_height="@dimen/rating_view_donut_height"
-        android:translationZ="@dimen/rating_view_donut_transZ"
-        app:stroke="10"
+        android:layout_width="@dimen/rating_donut_size"
+        android:layout_height="@dimen/rating_donut_size"
+        android:translationZ="@dimen/rating_donut_trZ"
+        app:stroke="12"
         app:progress="77"
-        android:layout_gravity="bottom|start"
+        android:layout_gravity="bottom|left"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -20,9 +21,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/film_item_cv_margin"
-        android:elevation="@dimen/cardview_default_elevation"
-        app:cardCornerRadius="@dimen/film_item_cv_corner_radius">
+        android:layout_margin="@dimen/film_cv_margin"
+        android:elevation="@dimen/film_cv_elevat"
+        app:cardCornerRadius="@dimen/film_cv_cr">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/item_container"
@@ -31,7 +32,7 @@
 
             <ImageView
                 android:id="@+id/poster"
-                android:layout_width="150dp"
+                android:layout_width="@dimen/film_cv_iv_width"
                 android:scaleType="centerCrop"
                 android:layout_height="match_parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -40,21 +41,21 @@
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="@dimen/film_item_title_texview_width"
+                android:layout_width="@dimen/film_cv_tv_width"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:padding="@dimen/film_item_title_texview_padding"
+                android:padding="@dimen/film_cv_tv_padding"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 app:layout_constraintLeft_toRightOf="@+id/poster"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Title" />
+                tools:text="@string/film_tv_title" />
 
             <TextView
                 android:id="@+id/description"
-                android:layout_width="@dimen/film_item_descr_texview_width"
-                android:layout_height="@dimen/film_item_descr_texview_height"
-                android:padding="@dimen/film_item_descr_texview_padding"
+                android:layout_width="@dimen/film_cv_tv_width"
+                android:layout_height="@dimen/film_cv_tv_width"
+                android:padding="@dimen/film_cv_tv_padding"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/poster"
                 app:layout_constraintRight_toRightOf="parent"
@@ -64,3 +65,4 @@
     </androidx.cardview.widget.CardView>
 
 </FrameLayout>
+

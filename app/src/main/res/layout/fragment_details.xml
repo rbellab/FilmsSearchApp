@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="view.fragments.DetailsFragment">
+    android:fitsSystemWindows="true"
+    tools:context=".view.fragments.DetailsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/film_item_details_layout_height"
-        android:fitsSystemWindows="true"
+        android:layout_height="@dimen/film_details_ab_hight"
+        android:fitsSystemWindows="false"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            android:minHeight="@dimen/film_item_details_toolbar_min_height"
+            android:minHeight="@dimen/film_details_ctl_minHight"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
@@ -30,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:background="@color/white"
+                android:background="@color/colorAccent"
                 android:src="@drawable/ic_launcher_foreground"
                 app:layout_collapseMode="parallax" />
 
@@ -46,24 +46,24 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        style="@style/ActionButtonBackground"
         android:id="@+id/details_fab_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:borderWidth="0dp"
+        android:layout_margin="@dimen/film_details_fab_margin"
+        app:borderWidth="@dimen/film_details_fab_bw"
+        android:backgroundTint="@color/colorPrimaryDark"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|right"
         app:srcCompat="@drawable/ic_baseline_share_24"
         app:tint="@android:color/white"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        style="@style/ActionButtonBackground"
         android:id="@+id/details_fab_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:borderWidth="0dp"
+        android:layout_margin="@dimen/film_details_fab_margin"
+        app:borderWidth="@dimen/film_details_fab_bw"
+        android:backgroundTint="@color/colorPrimaryDark"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="left|bottom"
         app:srcCompat="@drawable/ic_baseline_favorite_border_24"
@@ -78,7 +78,7 @@
             android:id="@+id/details_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/film_details_tv_margin"
             tools:text="@tools:sample/lorem/random" />
 
     </androidx.core.widget.NestedScrollView>
