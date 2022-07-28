@@ -14,15 +14,13 @@ import com.bumptech.glide.Glide
 
 class DetailsFragment : Fragment() {
     private lateinit var film: Film
-
-    private var _binding: FragmentDetailsBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentDetailsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -43,15 +41,19 @@ class DetailsFragment : Fragment() {
         binding.detailsFabShare.setOnClickListener {
             // Создаем интент
             val intent = Intent()
+
             // Укзываем action с которым он запускается
             intent.action = Intent.ACTION_SEND
+
             // Кладем данные о нашем фильме
             intent.putExtra(
                 Intent.EXTRA_TEXT,
                 "Привет! Зацени киношку: ${film.title} \n\n ${film.description}"
             )
-            // УКазываем MIME тип, чтобы система знала, какое приложения предложить
+
+            // Указываем MIME тип, чтобы система знала, какое приложения предложить
             intent.type = "text/plain"
+
             // Запускаем наше активити
             startActivity(Intent.createChooser(intent, "Поделиться с:"))
         }
@@ -63,11 +65,13 @@ class DetailsFragment : Fragment() {
 
         // Устанавливаем заголовок
         binding.detailsToolbar.title = film.title
+
         // Устанавливаем картинку
         Glide.with(this)
-            .load(ApiConstants.BASE_MOVIE_IMAGE_URL + "w780" + film.poster)
+            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
             .centerCrop()
             .into(binding.detailsPoster)
+
         // Устанавливаем описание
         binding.detailsDescription.text = film.description
 
@@ -75,10 +79,5 @@ class DetailsFragment : Fragment() {
             if (film.isInFavorites) R.drawable.ic_baseline_favorite_24
             else R.drawable.ic_baseline_favorite_border_24
         )
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

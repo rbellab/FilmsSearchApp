@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_favorites"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_favorites"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background_favorite"
-    tools:context="view.fragments.FavoritesFragment">
+    android:id="@+id/favorites_fragment_root"
+    android:visibility="invisible"
+    tools:visibility="visible"
+    tools:context=".view.fragments.FavoritesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favorites_recycler"

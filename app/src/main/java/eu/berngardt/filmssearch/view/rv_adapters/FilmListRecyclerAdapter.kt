@@ -1,5 +1,4 @@
-package view.rv_adapters
-
+package eu.berngardt.filmssearch.view.rv_adapters
 
 import android.view.ViewGroup
 import eu.berngardt.filmssearch.R
@@ -7,23 +6,19 @@ import android.view.LayoutInflater
 import eu.berngardt.filmssearch.domain.Film
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.film_item.view.*
-import view.rv_viewholders.FilmViewHolder
-
+import eu.berngardt.filmssearch.view.rv_viewholders.FilmViewHolder
 
 // В параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити
-class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>()
-{
+class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
     // Здесь у нас хранится список элементов для RV
-    private val items = mutableListOf<Film>()
+    val items = mutableListOf<Film>()
 
     // Этот метод нужно переопределить на возврат количества елементов в списке RV
     override fun getItemCount() = items.size
 
-    // В этом методе мы привязываем наш ViewHolder и передаем туда "надутую" верстку нашего фильма
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-        : RecyclerView.ViewHolder
-    {
+    // В этом методе мы привязываем наш view holder и передаем туда "надутую" верстку нашего фильма
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return FilmViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.film_item, parent, false))
     }
 
@@ -35,7 +30,6 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener)
                 // Вызываем метод bind(), который мы создали и передаем туда объект
                 // из нашей базы данных с указанием позиции
                 holder.bind(items[position])
-
                 // Обрабатываем нажатие на весь элемент целиком(можно сделать на отдельный элемент
                 // напрмер, картинку) и вызываем метод нашего листенера, который мы получаем из
                 // конструктора адаптера
