@@ -2,8 +2,8 @@ package eu.berngardt.filmssearch.view.rv_viewholders
 
 import android.view.View
 import com.bumptech.glide.Glide
-import eu.berngardt.filmssearch.domain.Film
 import androidx.recyclerview.widget.RecyclerView
+import eu.berngardt.filmssearch.data.entity.Film
 import eu.berngardt.filmssearch.data.ApiConstants
 import kotlinx.android.synthetic.main.film_item.view.*
 

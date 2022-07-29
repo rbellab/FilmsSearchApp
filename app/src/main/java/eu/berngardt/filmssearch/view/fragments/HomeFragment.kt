@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.lifecycle.Observer
 import androidx.fragment.app.Fragment
-import eu.berngardt.filmssearch.domain.Film
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
+import eu.berngardt.filmssearch.data.entity.Film
 import eu.berngardt.filmssearch.view.MainActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 import eu.berngardt.filmssearch.utils.AnimationHelper
@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
 
         initSearchView()
         initPullToRefresh()
-        // находим наш RV
+        // Находим наш RV
         initRecyckler()
         // Кладем нашу БД в RV
         viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {

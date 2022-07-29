@@ -1,4 +1,4 @@
-package eu.berngardt.filmssearch.data.Entity
+package eu.berngardt.filmssearch.data.entity
 
 import com.google.gson.annotations.SerializedName
 

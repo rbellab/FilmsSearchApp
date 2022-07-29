@@ -3,8 +3,9 @@ package eu.berngardt.filmssearch.viewmodel
 import javax.inject.Inject
 import eu.berngardt.filmssearch.App
 import androidx.lifecycle.ViewModel
+import java.util.concurrent.Executors
 import androidx.lifecycle.MutableLiveData
-import eu.berngardt.filmssearch.domain.Film
+import eu.berngardt.filmssearch.data.entity.Film
 import eu.berngardt.filmssearch.domain.Interactor
 
 
@@ -29,7 +30,9 @@ class HomeFragmentViewModel : ViewModel() {
                 }
 
             override fun onFailure() {
-                filmsListLiveData.postValue(interactor.getFilmsFromDB())
+                Executors.newSingleThreadExecutor().execute {
+                    filmsListLiveData.postValue(interactor.getFilmsFromDB())
+                }
             }
         })
     }

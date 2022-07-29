@@ -1,7 +1,7 @@
 package eu.berngardt.filmssearch.utils
 
-import eu.berngardt.filmssearch.domain.Film
-import eu.berngardt.filmssearch.data.Entity.TmdbFilm
+import eu.berngardt.filmssearch.data.entity.Film
+import eu.berngardt.filmssearch.data.entity.TmdbFilm
 
 object Converter {
     fun convertApiListToDTOList(list: List<TmdbFilm>?): List<Film> {

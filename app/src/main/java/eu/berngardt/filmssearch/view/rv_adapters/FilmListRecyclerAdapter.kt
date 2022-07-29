@@ -3,8 +3,8 @@ package eu.berngardt.filmssearch.view.rv_adapters
 import android.view.ViewGroup
 import eu.berngardt.filmssearch.R
 import android.view.LayoutInflater
-import eu.berngardt.filmssearch.domain.Film
 import androidx.recyclerview.widget.RecyclerView
+import eu.berngardt.filmssearch.data.entity.Film
 import kotlinx.android.synthetic.main.film_item.view.*
 import eu.berngardt.filmssearch.view.rv_viewholders.FilmViewHolder
 

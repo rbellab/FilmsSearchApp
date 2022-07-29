@@ -5,14 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
-import eu.berngardt.filmssearch.domain.Film
+import eu.berngardt.filmssearch.data.entity.Film
 import eu.berngardt.filmssearch.view.MainActivity
 import eu.berngardt.filmssearch.utils.AnimationHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_favorites.*
+import eu.berngardt.filmssearch.databinding.FragmentFavoritesBinding
 import eu.berngardt.filmssearch.view.rv_adapters.FilmListRecyclerAdapter
 import eu.berngardt.filmssearch.view.rv_adapters.TopSpacingItemDecoration
-import eu.berngardt.filmssearch.databinding.FragmentFavoritesBinding
 
 
 class FavoritesFragment : Fragment() {
@@ -46,7 +46,7 @@ class FavoritesFragment : Fragment() {
             // Присваиваем адаптер
             adapter = filmsAdapter
 
-            // Присвои layoutmanager
+            // Присваиваем LayoutManager
             layoutManager = LinearLayoutManager(requireContext())
 
             // Применяем декоратор для отступов
