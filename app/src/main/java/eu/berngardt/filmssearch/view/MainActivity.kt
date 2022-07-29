@@ -3,9 +3,9 @@ package eu.berngardt.filmssearch.view
 import android.os.Bundle
 import eu.berngardt.filmssearch.*
 import androidx.fragment.app.Fragment
-import eu.berngardt.filmssearch.domain.Film
 import androidx.appcompat.app.AppCompatActivity
 import eu.berngardt.filmssearch.view.fragments.*
+import eu.berngardt.filmssearch.data.entity.Film
 import eu.berngardt.filmssearch.databinding.ActivityMainBinding
 
 

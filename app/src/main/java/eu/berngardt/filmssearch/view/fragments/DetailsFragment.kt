@@ -1,16 +1,17 @@
 package eu.berngardt.filmssearch.view.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import eu.berngardt.filmssearch.domain.Film
+import android.content.Intent
+import com.bumptech.glide.Glide
 import eu.berngardt.filmssearch.R
+import android.view.LayoutInflater
+import androidx.fragment.app.Fragment
 import eu.berngardt.filmssearch.data.ApiConstants
 import eu.berngardt.filmssearch.databinding.FragmentDetailsBinding
-import com.bumptech.glide.Glide
+
+import eu.berngardt.filmssearch.data.entity.Film
 
 class DetailsFragment : Fragment() {
     private lateinit var film: Film

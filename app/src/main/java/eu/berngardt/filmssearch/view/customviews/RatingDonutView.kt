@@ -83,7 +83,7 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
             color = getPaintColor(progress)
             isAntiAlias = true
         }
-        //Краска для заднего фона
+        // Краска для заднего фона
         circlePaint = Paint().apply {
             style = Paint.Style.FILL
             color = Color.DKGRAY
@@ -123,18 +123,18 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
         }
 
     override fun onDraw(canvas: Canvas) {
-        //Рисуем кольцо и задний фон
+        // Рисуем кольцо и задний фон
         drawRating(canvas)
-        //Рисуем цифры
+        // Рисуем цифры
         drawText(canvas)
     }
 
     fun setProgress(pr: Int) {
-        //Кладем новове значение в нашу поле класса
+        // Кладем новове значение в нашу поле класса
         progress = pr
-        //Создаем краски с новыми цветами
+        // Создаем краски с новыми цветами
         initPaint()
-        //вызываем перерисовку View
+        // Вызываем перерисовку View
         invalidate()
     }
 
