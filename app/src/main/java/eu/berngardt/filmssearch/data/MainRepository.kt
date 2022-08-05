@@ -1,5 +1,6 @@
 package eu.berngardt.filmssearch.data
 
+import androidx.lifecycle.LiveData
 import java.util.concurrent.Executors
 import eu.berngardt.filmssearch.data.dao.FilmDao
 import eu.berngardt.filmssearch.data.entity.Film
@@ -14,7 +15,6 @@ class MainRepository(private val filmDao: FilmDao) {
         }
     }
 
-    fun getAllFromDB(): List<Film> {
-        return filmDao.getCachedFilms()
-    }
+    fun getAllFromDB(): LiveData<List<Film>> = filmDao.getCachedFilms()
+
 }
