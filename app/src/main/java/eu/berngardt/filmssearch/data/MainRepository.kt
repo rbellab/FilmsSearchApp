@@ -2,6 +2,8 @@ package eu.berngardt.filmssearch.data
 
 
 import kotlinx.coroutines.flow.Flow
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.core.Observable
 import eu.berngardt.filmssearch.data.dao.FilmDao
 import eu.berngardt.filmssearch.data.entity.Film
 
@@ -12,6 +14,6 @@ class MainRepository(private val filmDao: FilmDao) {
         filmDao.insertAll(films)
     }
 
-    fun getAllFromDB(): Flow<List<Film>> = filmDao.getCachedFilms()
+    fun getAllFromDB(): Observable<List<Film>> = filmDao.getCachedFilms()
 
 }
