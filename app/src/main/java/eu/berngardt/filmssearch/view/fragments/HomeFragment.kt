@@ -3,13 +3,14 @@ package eu.berngardt.filmssearch.view.fragments
 import java.util.*
 import android.os.Bundle
 import android.view.View
+import kotlinx.coroutines.*
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import androidx.lifecycle.Observer
-import androidx.fragment.app.Fragment
-import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import kotlinx.coroutines.flow.collect
 import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.widget.SearchView
 import eu.berngardt.filmssearch.data.entity.Film
 import eu.berngardt.filmssearch.view.MainActivity
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -28,6 +29,7 @@ class HomeFragment : Fragment() {
     }
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var scope: CoroutineScope
     private var filmsDataBase = listOf<Film>()
         // Используем backing field
         set (value) {
@@ -60,19 +62,30 @@ class HomeFragment : Fragment() {
         initSearchView()
         initPullToRefresh()
         initRecyckler()
-        initObservers()
+	
+        //Кладем нашу БД в RV
+        scope = CoroutineScope(Dispatchers.IO).also { scope ->
+            scope.launch {
+                viewModel.filmsListData.collect {
+                    withContext(Dispatchers.Main) {
+                        filmsAdapter.addItems(it)
+                        filmsDataBase = it
+                    }
+                }
+            }
+            scope.launch {
+                for (element in viewModel.showProgressBar) {
+                    launch(Dispatchers.Main) {
+                        binding.progressBar.isVisible = element
+                    }
+                }
+            }
+        }
     }
 
-    private fun initObservers() {
-        // Кладем нашу БД в RV
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
-            filmsDataBase = it
-            filmsAdapter.addItems(it)
-        })
-
-        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
-            binding.progressBar.isVisible = it
-        })
+    override fun onStop() {
+        super.onStop()
+        scope.cancel()
     }
 
     private fun initPullToRefresh() {
