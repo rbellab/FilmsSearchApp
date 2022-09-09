@@ -5,8 +5,8 @@ import dagger.Provides
 import androidx.room.Room
 import javax.inject.Singleton
 import android.content.Context
-import eu.berngardt.filmssearch.data.MainRepository
 import eu.berngardt.filmssearch.data.dao.FilmDao
+import eu.berngardt.filmssearch.data.MainRepository
 import eu.berngardt.filmssearch.data.db.AppDatabase
 
 @Module

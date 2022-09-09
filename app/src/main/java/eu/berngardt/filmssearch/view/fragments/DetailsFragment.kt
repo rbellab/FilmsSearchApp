@@ -148,7 +148,7 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    //Узнаем, было ли получено разрешение ранее
+    // Узнаем, было ли получено разрешение ранее
     private fun checkPermission(): Boolean {
         val result = ContextCompat.checkSelfPermission(
             requireContext(),
@@ -156,7 +156,7 @@ class DetailsFragment : Fragment() {
         )
         return result == PackageManager.PERMISSION_GRANTED
     }
-    //Запрашиваем разрешение
+    // Запрашиваем разрешение
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
             requireActivity(),
@@ -166,11 +166,11 @@ class DetailsFragment : Fragment() {
     }
 
     private fun saveToGallery(bitmap: Bitmap) {
-        //Проверяем версию системы
+        // Проверяем версию системы
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            //Создаем объект для передачи данных
+            // Создаем объект для передачи данных
             val contentValues = ContentValues().apply {
-                //Составляем информацию для файла(имя, тип, дата создания, куда сохранять и т.д.)
+                // Составляем информацию для файла(имя, тип, дата создания, куда сохранять и т.д.)
                 put(MediaStore.Images.Media.TITLE, film.title.handleSingleQuote())
                 put(
                     MediaStore.Images.Media.DISPLAY_NAME,
@@ -184,20 +184,20 @@ class DetailsFragment : Fragment() {
                 put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
                 put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/FilmsSearchApp")
             }
-            //Получаем ссылку на объект Content resolver, которые помогает передвать информацию из приложения во вне
+            // Получаем ссылку на объект Content resolver, которые помогает передвать информацию из приложения во вне
             val contentResolver = requireActivity().contentResolver
             val uri = contentResolver.insert(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 contentValues
             )
-            //Открываем канал для записи на диск
+            // Открываем канал для записи на диск
             val outputStream = contentResolver.openOutputStream(uri!!)
-            //Передаем нашу картинку, может сделать компрессию
+            // Передаем нашу картинку, может сделать компрессию
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-            //Закрываем поток
+            // Закрываем поток
             outputStream?.close()
         } else {
-            //Тоже, но для более старых версий ОС
+            // Тоже, но для более старых версий ОС
             @Suppress("DEPRECATION")
             MediaStore.Images.Media.insertImage(
                 requireActivity().contentResolver,

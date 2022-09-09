@@ -5,7 +5,7 @@ import androidx.room.Entity
 import android.os.Parcelable
 import androidx.room.PrimaryKey
 import androidx.room.ColumnInfo
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(tableName = "cached_films", indices = [Index(value = ["title"], unique = true)])
