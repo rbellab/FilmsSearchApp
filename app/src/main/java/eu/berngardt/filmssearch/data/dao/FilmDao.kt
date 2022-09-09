@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.core.Observable
 import eu.berngardt.filmssearch.data.entity.Film
 

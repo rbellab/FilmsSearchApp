@@ -11,6 +11,7 @@ import eu.berngardt.filmssearch.data.TmdbApi
 import okhttp3.logging.HttpLoggingInterceptor
 import eu.berngardt.filmssearch.data.ApiConstants
 import retrofit2.converter.gson.GsonConverterFactory
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 
 
 @Module
@@ -38,7 +39,9 @@ class RemoteModule {
         .baseUrl(ApiConstants.BASE_URL)
         // Добавляем конвертер
         .addConverterFactory(GsonConverterFactory.create())
-        // Добавляем кастомный клиент
+        // Добавляем поддержку RxJava
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+        //Добавляем кастомный клиент
         .client(okHttpClient)
         .build()
 

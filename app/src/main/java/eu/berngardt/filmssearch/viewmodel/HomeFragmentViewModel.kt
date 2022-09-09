@@ -26,6 +26,8 @@ class HomeFragmentViewModel : ViewModel() {
     fun getFilms() {
         interactor.getFilmsFromApi(DEFAULT_PAGE_NUMMER)
     }
+    
+    fun getSearchResult(search: String) = interactor.getSearchResultFromApi(search)
 
     companion object {
         private const val DEFAULT_PAGE_NUMMER = 1

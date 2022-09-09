@@ -60,9 +60,10 @@ dependencies {
 
     // Retrofit
     def retrofit_version = "2.9.0"
+    def intercept_version = "5.0.0-alpha.10"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10'
+    implementation "com.squareup.okhttp3:logging-interceptor:$intercept_version"
 
     // Dagger
     def dagger_version = "2.42"
@@ -78,10 +79,16 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     
     //Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
+    def kotlinx_version = "1.4.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_version"
 
     //RxJava
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.10'
+    def rxjava_version = "3.0.10"
+    def rxandr_version = "3.0.0"
+    def rxkotlin_version = "3.0.1"
+    implementation "io.reactivex.rxjava3:rxandroid:$rxandr_version"
+    implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:$rxandr_version"
 }
