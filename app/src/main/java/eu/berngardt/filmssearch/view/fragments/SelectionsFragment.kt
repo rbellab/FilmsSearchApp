@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import eu.berngardt.filmssearch.utils.AnimationHelper
-import kotlinx.android.synthetic.main.fragment_selections.*
 import eu.berngardt.filmssearch.databinding.FragmentSelectionsBinding
 
 class SelectionsFragment : Fragment() {
@@ -23,7 +22,7 @@ class SelectionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        AnimationHelper.performFragmentCircularRevealAnimation(selections_fragment_root, requireActivity(), DECORATOR_PADDING)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.selectionsFragmentRoot, requireActivity(), DECORATOR_PADDING)
     }
 
     companion object {

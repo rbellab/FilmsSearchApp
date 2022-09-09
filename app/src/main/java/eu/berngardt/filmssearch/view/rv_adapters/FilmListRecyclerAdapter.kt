@@ -5,7 +5,6 @@ import eu.berngardt.filmssearch.R
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import eu.berngardt.filmssearch.data.entity.Film
-import kotlinx.android.synthetic.main.film_item.view.*
 import eu.berngardt.filmssearch.view.rv_viewholders.FilmViewHolder
 
 // В параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити
@@ -33,7 +32,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
                 // Обрабатываем нажатие на весь элемент целиком(можно сделать на отдельный элемент
                 // напрмер, картинку) и вызываем метод нашего листенера, который мы получаем из
                 // конструктора адаптера
-                holder.itemView.item_container.setOnClickListener {
+                holder.itemView.setOnClickListener {
                     clickListener.click(items[position])
                 }
             }

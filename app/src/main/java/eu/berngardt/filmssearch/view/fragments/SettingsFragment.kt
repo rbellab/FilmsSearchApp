@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import eu.berngardt.filmssearch.utils.AnimationHelper
-import kotlinx.android.synthetic.main.fragment_settings.*
 import eu.berngardt.filmssearch.databinding.FragmentSettingsBinding
 import eu.berngardt.filmssearch.viewmodel.SettingsFragmentViewModel
 
@@ -32,7 +31,7 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Подключаем анимаци, и передаем номер позиции у кнопки в нижнем меню
-        AnimationHelper.performFragmentCircularRevealAnimation(settings_fragment_root, requireActivity(), ANIMATION_POSITION)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.settingsFragmentRoot, requireActivity(), ANIMATION_POSITION)
 
         // Слушаем какой у нас сейчас выбран вариант в настройках
         viewModel.categoryPropertyLifeData.observe(viewLifecycleOwner, Observer<String> {

@@ -3,21 +3,22 @@ package eu.berngardt.filmssearch.view.fragments
 import java.util.*
 import android.os.Bundle
 import android.view.View
-import kotlinx.coroutines.*
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import kotlinx.coroutines.flow.collect
 import androidx.lifecycle.ViewModelProvider
 import androidx.appcompat.widget.SearchView
+import eu.berngardt.filmssearch.utils.addTo
 import eu.berngardt.filmssearch.data.entity.Film
 import eu.berngardt.filmssearch.view.MainActivity
-import kotlinx.android.synthetic.main.fragment_home.*
+import io.reactivex.rxjava3.schedulers.Schedulers
+import eu.berngardt.filmssearch.utils.AutoDisposable
 import eu.berngardt.filmssearch.utils.AnimationHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import eu.berngardt.filmssearch.databinding.FragmentHomeBinding
 import eu.berngardt.filmssearch.viewmodel.HomeFragmentViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import eu.berngardt.filmssearch.view.rv_adapters.FilmListRecyclerAdapter
 import eu.berngardt.filmssearch.view.rv_adapters.TopSpacingItemDecoration
 
@@ -27,9 +28,10 @@ class HomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
+    private val autoDisposable = AutoDisposable()
+
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var scope: CoroutineScope
     private var filmsDataBase = listOf<Film>()
         // Используем backing field
         set (value) {
@@ -43,6 +45,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        autoDisposable.bindTo(lifecycle)
         retainInstance = true
     }
 
@@ -57,35 +60,29 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimationHelper.performFragmentCircularRevealAnimation(home_fragment_root, requireActivity(), 1)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
 
         initSearchView()
         initPullToRefresh()
         initRecyckler()
 	
         //Кладем нашу БД в RV
-        scope = CoroutineScope(Dispatchers.IO).also { scope ->
-            scope.launch {
-                viewModel.filmsListData.collect {
-                    withContext(Dispatchers.Main) {
-                        filmsAdapter.addItems(it)
-                        filmsDataBase = it
-                    }
-                }
-            }
-            scope.launch {
-                for (element in viewModel.showProgressBar) {
-                    launch(Dispatchers.Main) {
-                        binding.progressBar.isVisible = element
-                    }
-                }
-            }
-        }
-    }
 
-    override fun onStop() {
-        super.onStop()
-        scope.cancel()
+        viewModel.filmsListData
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { list ->
+                filmsAdapter.addItems(list)
+                filmsDataBase = list
+            }
+            .addTo(autoDisposable)
+        viewModel.showProgressBar
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                binding.progressBar.isVisible = it
+            }
+            .addTo(autoDisposable)
     }
 
     private fun initPullToRefresh() {
@@ -101,12 +98,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun initSearchView() {
-        search_view.setOnClickListener {
-            search_view.isIconified = false
+        binding.searchView.setOnClickListener {
+            binding.searchView.isIconified = false
         }
 
         // Подключаем слушателя изменений введенного текста в поиска
-        search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             // Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
@@ -135,7 +132,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initRecyckler() {
-        main_recycler.apply {
+        binding.mainRecycler.apply {
             filmsAdapter =
                 FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                     override fun click(film: Film) {

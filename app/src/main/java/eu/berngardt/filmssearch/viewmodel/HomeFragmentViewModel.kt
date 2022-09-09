@@ -1,23 +1,20 @@
 package eu.berngardt.filmssearch.viewmodel
 
 import javax.inject.Inject
-import kotlinx.coroutines.launch
 import eu.berngardt.filmssearch.App
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.channels.Channel
+import io.reactivex.rxjava3.core.Observable
 import eu.berngardt.filmssearch.data.entity.Film
 import eu.berngardt.filmssearch.domain.Interactor
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 
 
 class HomeFragmentViewModel : ViewModel() {
     //Инициализируем интерактор
     @Inject
     lateinit var interactor: Interactor
-    val filmsListData: Flow<List<Film>>
-    val showProgressBar: Channel<Boolean>
+    val filmsListData: Observable<List<Film>>
+    val showProgressBar: BehaviorSubject<Boolean>
 
     init {
         App.instance.dagger.inject(this)
