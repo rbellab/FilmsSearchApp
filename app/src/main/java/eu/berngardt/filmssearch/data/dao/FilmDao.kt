@@ -7,6 +7,8 @@ import androidx.room.OnConflictStrategy
 import io.reactivex.rxjava3.core.Observable
 import eu.berngardt.filmssearch.data.entity.Film
 
+import io.reactivex.rxjava3.core.Single
+
 // Помечаем, что это не просто интерфейс а Dao-объект
 @Dao
 interface FilmDao {

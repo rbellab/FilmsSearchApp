@@ -4,6 +4,9 @@ import io.reactivex.rxjava3.core.Observable
 import eu.berngardt.filmssearch.data.dao.FilmDao
 import eu.berngardt.filmssearch.data.entity.Film
 
+import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
+
 
 class MainRepository(private val filmDao: FilmDao) {
 
