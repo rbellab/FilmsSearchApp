@@ -15,7 +15,7 @@ class App : Application() {
 
         // Создаем компонент
         val remoteProvider = DaggerRemoteComponent.create()
-        dagger = DaggerAppComponent.builder()
+        dagger = AppComponent.builder()
             .remoteProvider(remoteProvider)
             .databaseModule(DatabaseModule())
             .domainModule(DomainModule(this))
