@@ -32,7 +32,6 @@ android {
     kapt {
         correctErrorTypes true
     }
-    namespace 'eu.berngardt.remote_module'
 }
 
 dependencies {
