@@ -1,4 +1,4 @@
-package eu.berngardt.filmssearch.di.modules
+package eu.berngardt.remote_module
 
 import dagger.Module
 import dagger.Provides
@@ -6,10 +6,8 @@ import retrofit2.Retrofit
 import okhttp3.OkHttpClient
 import javax.inject.Singleton
 import java.util.concurrent.TimeUnit
-import eu.berngardt.filmssearch.BuildConfig
-import eu.berngardt.filmssearch.data.TmdbApi
 import okhttp3.logging.HttpLoggingInterceptor
-import eu.berngardt.filmssearch.data.ApiConstants
+import eu.berngardt.remote_module.entity.ApiConstants
 import retrofit2.converter.gson.GsonConverterFactory
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 

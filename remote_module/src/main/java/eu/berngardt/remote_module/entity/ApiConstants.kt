@@ -1,4 +1,4 @@
-package eu.berngardt.filmssearch.data
+package eu.berngardt.remote_module.entity
 
 object ApiConstants {
     const val BASE_URL = "https://api.themoviedb.org/"

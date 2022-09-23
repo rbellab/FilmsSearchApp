@@ -1,11 +1,10 @@
-package eu.berngardt.filmssearch.data
+package eu.berngardt.remote_module
 
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 import io.reactivex.rxjava3.core.Observable
-import eu.berngardt.filmssearch.data.entity.TmdbResults
+import eu.berngardt.remote_module.entity.TmdbResults
 
 interface TmdbApi {
     @GET("3/movie/{category}")
@@ -14,7 +13,7 @@ interface TmdbApi {
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Call<TmdbResults>
+    ): Observable<TmdbResults>
 
     @GET("3/search/movie")
     fun getFilmFromSearch(
