@@ -11,6 +11,7 @@ import eu.berngardt.filmssearch.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var receiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,18 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.fragment_placeholder, HomeFragment())
             .addToBackStack(null)
             .commit()
+
+        receiver = ConnectionChecker()
+        val filters = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_BATTERY_LOW)
+        }
+        registerReceiver(receiver, filters)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
     }
 
     fun launchDetailsFragment(film: Film) {
