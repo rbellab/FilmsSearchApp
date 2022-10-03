@@ -38,8 +38,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-    namespace 'eu.berngardt.filmssearch'
 }
 
 dependencies {
@@ -60,14 +58,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
-    // Retrofit
-    def retrofit_version = "2.9.0"
-    def intercept_version = "5.0.0-alpha.10"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$intercept_version"
-
-    // Dagger
+     // Dagger
     def dagger_version = "2.42"
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
@@ -92,8 +83,7 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxandroid:$rxandr_version"
     implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
     implementation "io.reactivex.rxjava3:rxkotlin:$rxkotlin_version"
-    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:$rxandr_version"
-    
+     
     // Remote module
     implementation project(":remote_module")
 }

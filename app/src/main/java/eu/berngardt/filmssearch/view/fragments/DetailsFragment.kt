@@ -77,6 +77,10 @@ class DetailsFragment : Fragment() {
         binding.detailsFabDownloadWp.setOnClickListener {
             performAsyncLoadOfPoster()
         }
+
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.createNotification(requireContext(), film)
+        }
     }
 
     override fun onDestroy() {
