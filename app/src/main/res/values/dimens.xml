@@ -26,4 +26,10 @@
     <dimen name="film_sv_margin">8dp</dimen>
     <dimen name="home_progress_bar_size">100dp</dimen>
     <dimen name="film_details_fab_tranlX">72dp</dimen>
+    <dimen name="rdv_stroke">12</dimen>
+    <dimen name="rdv_progress">77</dimen>
+    <dimen name="film_details_fab_tranlX_2">144dp</dimen>
+    <dimen name="fragment_details_pb_w">50dp</dimen>
+    <dimen name="fragment_details_tz">10px</dimen>
+    <dimen name="fragment_details_pb_h">50dp</dimen>
 </resources>
